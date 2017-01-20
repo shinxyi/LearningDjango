@@ -1,0 +1,42 @@
+<html>
+  <head>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'survey/css/styles.css' %}" type="text/css">
+  </head>
+  <body>
+    {% if messages %}
+      <ul class="messages">
+          {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+    {% endif %}
+
+    <div id="info">
+      <h3>Submitted Information</h3>
+      <table>
+        <tbody>
+          <tr>
+            <td>Name:</td>
+            <td>{{request.session.name}}</td>
+          </tr>
+          <tr>
+            <td>Dojo Location:</td>
+            <td>{{request.session.location}}</td>
+          </tr>
+          <tr>
+            <td>Favorite Language:</td>
+            <td>{{request.session.language}}!!!</td>
+          </tr>
+          <tr>
+            <td>Comment:</td>
+            <td>{{request.session.comment}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <form action='/reset'>
+        <div class="right-align"><button type="submit">Go Back</button></div>
+      </form>
+    </div>
+  </body>
+</html>
