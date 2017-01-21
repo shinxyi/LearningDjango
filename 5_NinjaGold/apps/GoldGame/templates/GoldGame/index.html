@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ninja Gold Game</title>
+    {%load staticfiles %}
+    <link rel="stylesheet" href="{% static 'GoldGame/css/my_style.css' %}" type="text/css">
+  </head>
+  <body>
+    <div id="gold_info"><h3> Your Gold:</h3><div id="gold">{{request.session.gold}}</div></div>
+    <div id="wrapper">
+      <form class="location" action="/process_money/farm" method="post">
+        {% csrf_token %}
+        <h2>Farm</h2>
+        <p>(earns 10-20 golds)</p>
+        <input type="submit" value="Find Gold!">
+      </form>
+      <form class="location" action="/process_money/cave" method="post">
+        {% csrf_token %}
+        <h2>Cave</h2>
+        <p>(earns 5-10 golds)</p>
+        <input type="submit" value="Find Gold!">
+      </form>
+      <form class="location" action="/process_money/house" method="post">
+        {% csrf_token %}
+        <h2>House</h2>
+        <p>(earns 2-5 golds)</p>
+        <input type="submit" value="Find Gold!">
+      </form>
+      <form class="location" action="/process_money/casino" method="post">
+        {% csrf_token %}
+        <h2>Casino</h2>
+        <p>(earns/takes 0-50 golds)</p>
+        <input type="submit" value="Find Gold!">
+        </form>
+    </div>
+
+    <h4>Activity:</h4>
+    <div id="activity">
+      {% for i in request.session.activities %}
+        {% if "Entered" in i%}
+          <p class="red">{{i}}</p>
+        {% else %}
+        <p class="green">{{i}}</p>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </body>
+</html>
