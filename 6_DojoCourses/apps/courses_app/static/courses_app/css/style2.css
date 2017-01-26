@@ -1,0 +1,31 @@
+* {
+  font-family: sans-serif;
+}
+
+#info{
+  width: 900px;
+  margin: 0px auto;
+  text-align: center;
+}
+
+table{
+  width: 500px;
+  margin: 0px auto;
+}
+td{
+  padding: 5px;
+}
+
+form{
+  display: inline-block;
+}
+
+input[type='submit']{
+  background-color: red;
+  color: white;
+}
+
+button{
+  background-color: green;
+  color: white;
+}
