@@ -1,0 +1,31 @@
+* {
+  font-family: sans-serif;
+}
+
+.reg_login{
+  display:inline-block;
+  width: 400px;
+}
+
+table{
+  text-align: right;
+}
+
+ul li{
+  list-style-type: none;
+}
+
+.error, .confirmation{
+  color:white;
+  padding:5px 10px;
+  margin: 5px;
+  width: 200px;
+}
+
+.error{
+  background-color: red;
+}
+
+.confirmation{
+  background-color: green;
+}

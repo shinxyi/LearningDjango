@@ -1,0 +1,75 @@
+<html>
+  <head>
+    <title>Login & Reg | Home</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static '/loginreg_app/css/style.css' %}" type="text/css">
+  </head>
+  <body>
+    <div class="reg_login">
+      <h2>Registration</h2>
+      {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+      {% endif %}
+      <form action='/register' method='POST'>
+        {% csrf_token %}
+      <table>
+        <tbody>
+          <tr>
+            <td>First Name:</td>
+          <td><input type="text" name="first_name" value="{{request.session.first_name}}" /></td>
+        </tr>
+        <tr>
+            <td>Last Name:</td>
+          <td><input type="text" name="last_name" value="{{request.session.last_name}}" /></td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+          <td><input type="text" name="email" value="{{request.session.email}}" /></td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+          <td><input type="password" name="password" /></td>
+        </tr>
+        <tr>
+            <td>Confirm Password:</td>
+          <td><input type="password" name="confirm_password" /></td>
+        </tr>
+        <tr>
+          <td><input type="submit" value="Register!"></td>
+      </tbody>
+    </table>
+      </form>
+    </div>
+
+    <div class="reg_login">
+      <h3>Log In</h3>
+      {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+      {% endif %}
+      <form action='/login' method='POST'>
+        {% csrf_token %}
+        <table>
+          <tbody>
+            <tr>
+              <td>Email:</td>
+              <td><input type="text" name="email1" value="{{request.session.email1}}"></td>
+            </tr>
+            <tr>
+              <td>Password:</td>
+              <td><input type="password" name="password1"></td>
+            </tr>
+            <tr>
+              <td><input type="submit" value="Log In!"></td>
+            </tr>
+      </form>
+    </div>
+  </body>
+</html>

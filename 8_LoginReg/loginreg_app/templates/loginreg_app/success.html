@@ -1,0 +1,23 @@
+<html>
+<head>
+ <title>Login & Reg | Success</title>
+ {% load staticfiles %}
+ <link rel="stylesheet" href="{% static '/loginreg_app/css/style.css' %}" type="text/css">
+</head>
+<body>
+ <h1>Success! Welcome, {{name}} !</h1>
+ {% if messages %}
+   <ul class="messages">
+       {% for message in messages %}
+       <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+       {% endfor %}
+   </ul>
+ {% endif %}
+
+ <form action='/logout'>
+   {% csrf_token %}
+   <input type="submit" value="Logout">
+ </form>
+
+</body>
+</html>
