@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <title> Product {{ product.id }} Info | Semi Restful Route Demo </title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static '/loginreg_app/css/style.css' %}" type="text/css">
+
+  </head>
+  <body>
+    <h1>Product {{ product.id }}</h1>
+    {% if messages %}
+      <ul class="messages">
+          {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+    {% endif %}
+
+    <form action="/products/update/{{product.id}}" method='POST'>
+      {% csrf_token %}
+      <table>
+        <tbody>
+            <tr>
+              <td> Name:</td>
+            </tr>
+            <tr>
+              <td><input type="Text" name="name" value="{{product.name}}" /></td>
+            </tr>
+            <tr>
+              <td> Description:</td>
+            </tr>
+            <tr>
+              <td><textarea name="description">{{product.description}}</textarea></td>
+            </tr>
+            <tr>
+              <td> Price:</td>
+            </tr>
+            <tr>
+              <td>$<input type="number" name="price" min="0" value="{{product.price}}" /></td>
+            </tr>
+            <tr>
+              <td><input type="submit" value="Update" /></td>
+            </tr>
+        </tbody>
+      </table>
+    </form>
+
+
+    <a href="{%url 'show' id=product.id %}">Show</a> | <a href="{%url 'index'%}">Back</a>
+  </body>
+</html>

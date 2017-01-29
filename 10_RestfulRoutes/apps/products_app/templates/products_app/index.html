@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <title> All Products | Semi Restful Route Demo </title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static '/loginreg_app/css/style.css' %}" type="text/css">
+  </head>
+  <body>
+    <h1>Products</h1>
+    {% if messages %}
+      <ul class="messages">
+          {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+    {% endif %}
+    <table>
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Description</td>
+          <td>Price</td>
+          <td>Actions</td>
+        </tr>
+      </thead>
+      <tbody>
+        {% for product in products %}
+        <tr>
+          <td>{{product.name}}</td>
+          <td>{{product.description}}</td>
+          <td>${{product.price}}</td>
+          <td>
+            <a href="{% url 'show' id=product.id%}">Show</a> |
+            <a href="{% url 'edit' id=product.id%}">Edit</a> |
+            <a href="{% url 'destroy' id=product.id%}"> Remove</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <a href="{% url 'new'%}">Add a new product</a>
+  </body>
+</html>
