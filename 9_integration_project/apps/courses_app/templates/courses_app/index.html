@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <title>Add a student to all bootcamp courses</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static '/courses_app/css/style.css' %}" type="text/css">
+  </head>
+  <body>
+    {% if messages %}
+      <ul class="messages">
+          {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+    {% endif %}
+
+    <div id="add"> <!--form to add a new course-->
+      <h3>Add a new course</h3>
+      <form action="{%url 'courses:create'%}" method="post">
+        {% csrf_token %}
+        <table>
+          <tbody>
+            <tr>
+              <td>Name*:</td>
+              <td><input type="text" name="name" value="{{request.session.name}}" placeholder="Min 15 charas" /></td>
+            </tr>
+            <tr>
+              <td>Description:</td>
+              <td><textarea name="description" placeholder="Description is optional">{{request.session.description}}</textarea></td>
+            </tr>
+          </tbody>
+        </table>
+        <h6>* field is required</h6>
+        <input type="submit" value="Add" />
+      </form>
+    </div>
+
+    <div id="courses"> <!--list all the courses-->
+      <table>
+        <thead>
+          <tr>
+            <td>Course Name</td>
+            <td>Description</td>
+            <td>Date Added</td>
+            <td>Actions</td>
+          </tr>
+        </thead>
+        <tbody>
+            {% for course in courses %}
+            <tr>
+              <td>{{course.name}}</td>
+              <td>
+                {{course.description.description}}
+              </td>
+              <td>{{course.created_at}}</td>
+              <td><a href="{% url 'courses:show' id=course.id%}">remove</a></td>
+            </tr>
+            {%endfor%}
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

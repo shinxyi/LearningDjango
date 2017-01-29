@@ -1,0 +1,80 @@
+<html>
+  <head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'survey/css/styles.css' %}" type="text/css">
+    <script type="text/javascript" src="{% static 'survey/js/jquery-3.1.1.js' %}"></script>
+    <script>
+    //added this script in response to the comment on the last Dojo Survey
+    //regarding making it possible to save user selected responses on top
+    //of saving their typed respones
+    function formFill(selected, select_form){
+        for(var i = 0;i < document.getElementById(select_form).length;i++){
+            if(document.getElementById(select_form).options[i].value == selected ){
+                document.getElementById(select_form).selectedIndex = i;
+            }
+        }
+    }
+
+    $(document).ready(function(){
+      formFill("{{request.session.location}}", "location")
+      formFill("{{request.session.language}}", "language")
+
+      });
+    </script>
+
+  </head>
+  <body>
+
+    {% if messages %}
+      <ul class="messages">
+          {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+    {% endif %}
+
+    <div id="survey">
+      <form action="/process" method="post">
+        {% csrf_token %}
+        <table>
+          <tbody>
+            <tr>
+              <td>Your Name:</td>
+              <td><input type="text" name="name" value="{{request.session.name}}" placeholder="Type your name!" /></td>
+            </tr>
+            <tr>
+              <td>Dojo Location:</td>
+              <td>
+                <select id="location" name="location">
+                  <option value=''>Pick One Below</option>
+                  <option value="Silicon Valley">Silicon Valley</option>
+                  <option value="Seattle">Seattle</option>
+                  <option value="Los Angeles">Los Angeles</option>
+                  <option value="Dallas">Dallas</option>
+                  <option value="Washington DC">Washington DC</option>
+                  <option value="Chicago">Chicago</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>Favorite Language:</td>
+              <td>
+                <select id="language" name="language">
+                  <option value=''>Pick One Below</option>
+                  <option value="Python">Python</option>
+                  <option value="PHP">PHP</option>
+                  <option value="C++">C++</option>
+                  <option value="C#">C#</option>
+                  <option value="JavaScript">JavaScript</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Comment (optional):</p>
+        <textarea name="comment" placeholder="Type your comment here!">{{request.session.comment}}</textarea>
+        <div class="right-align"><button type="submit">Submit</button></div>
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+* {
+  font-family: sans-serif;
+}
+#survey, #info{
+  width: 300px;
+  position: relative;
+  border: 2px solid black;
+  padding: 20px;
+  margin: 20px auto;
+}
+textarea{
+  width: 300px;
+  height: 100px;
+}
+
+button{
+  display:block;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+h3{
+  text-decoration: underline;
+}
+
+.info, .success{
+  width: 300px;
+  text-align: center;
+  margin: 20px auto;
+  padding: 20px;
+  color: white;
+}
+
+.info{
+  background-color: darkred;
+}
+
+.success{
+  background-color: green;
+}

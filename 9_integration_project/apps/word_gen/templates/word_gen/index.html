@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <title>Random Word Generator</title>
+    <style>
+      *{
+        font-family: sans-serif;
+      }
+      h3{
+        text-align: center;
+      }
+      #box{
+        width: 700px;
+        font-size: 75px;
+        margin: 0px auto;
+        border: 2px solid black;
+        text-align: center;
+        padding: 10px;
+      }
+      form{
+        width: 500px;
+        text-align: center;
+        margin: 0px auto;
+      }
+      input[type="submit"]{
+        width: 200px;
+        font-size: 24px;
+        margin: 10px auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h3> Random Word (attempt # {{request.session.counter}})</h3>
+    <div id="box">{{request.session.string}}</div>
+    <form action="/generate">
+      <input type="submit" value="Generate" />
+    </form>
+  </body>
+</html>
