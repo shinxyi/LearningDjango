@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    {% if messages %}
+      <ul class="messages">
+          {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+    {% endif %}
+
+    <h3>Register</h3>
+    <form class="" action="{%url 'register'%}" method="post">
+      {%csrf_token%}
+      {{myregistrationform.as_p}}
+      <input type="submit" value="Register">
+    </form>
+    <h3>Login</h3>
+    <form class="" action="{%url 'login'%}" method="post">
+      {%csrf_token%}
+      {{myloginform.as_p}}
+      <input type="submit" value="Login">
+    </form>
+
+  </body>
+</html>
